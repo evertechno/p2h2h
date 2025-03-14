@@ -1,12 +1,16 @@
 import streamlit as st
-import pdf2html
+import fitz  # PyMuPDF
 import base64
 from bs4 import BeautifulSoup
 
 def pdf_to_html_converter(pdf_file):
-    """Converts a PDF file to HTML."""
+    """Converts a PDF file to HTML using PyMuPDF."""
     try:
-        html_string = pdf2html.convert(pdf_file)
+        doc = fitz.open(pdf_file)
+        html_string = ""
+        for page in doc:
+            html_string += page.get_text("html")
+        doc.close()
         return html_string
     except Exception as e:
         st.error(f"Error converting PDF to HTML: {e}")
