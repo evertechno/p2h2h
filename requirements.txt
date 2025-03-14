@@ -1,4 +1,3 @@
-streamlit
-pdf2html 
+streamlit 
 bs4
-pdf2html
+PyMuPDF 
